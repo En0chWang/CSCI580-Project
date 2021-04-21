@@ -1,6 +1,8 @@
 let scene, camera, renderer, skyboxGeo, skybox, controls, myReq;
 let zoomOut = false;
 let autoRotate = true;
+// Initial SkyboxImage is Arid. If you wanna change the path of inital SkybokImage or add button. to add button check the code above. I left the comment. 
+// You can download free images for Skybox! -> opengameart.org
 let skyboxImage = 'Arid/arid2';
 
 function init() {
