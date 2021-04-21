@@ -1,0 +1,5 @@
+- Cubemap_Images: you can put skybox images under here
+- OrbitControls.js: mouse control of the camera
+- InitializedSkybox.js: Initialized background image, environment and eventListeners
+- main.html: main html file. you can run html on your local with this url -> http://localhost:8080/main.html
+- styles.css: design code for buttons / window size 
