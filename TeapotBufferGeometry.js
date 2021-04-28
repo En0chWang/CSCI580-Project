@@ -1780,8 +1780,11 @@ THREE.TeapotBufferGeometry = function (
   this.addAttribute('position', new THREE.BufferAttribute(vertices, 3))
   this.addAttribute('normal', new THREE.BufferAttribute(normals, 3))
   this.addAttribute('uv', new THREE.BufferAttribute(uvs, 2))
-
-  this.computeBoundingSphere()
+  // this.addAttribute(
+  //   'color',
+  //   new THREE.BufferAttribute(new Uint8Array([0, 0, 0], 3))
+  // )
+  // this.computeBoundingSphere()
 }
 
 THREE.TeapotBufferGeometry.prototype = Object.create(
