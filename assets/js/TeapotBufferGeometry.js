@@ -1777,14 +1777,11 @@ THREE.TeapotBufferGeometry = function (
   }
 
   this.setIndex(new THREE.BufferAttribute(indices, 1))
-  this.addAttribute('position', new THREE.BufferAttribute(vertices, 3))
-  this.addAttribute('normal', new THREE.BufferAttribute(normals, 3))
-  this.addAttribute('uv', new THREE.BufferAttribute(uvs, 2))
-  // this.addAttribute(
-  //   'color',
-  //   new THREE.BufferAttribute(new Uint8Array([0, 0, 0], 3))
-  // )
-  // this.computeBoundingSphere()
+  this.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
+  this.setAttribute('normal', new THREE.BufferAttribute(normals, 3))
+  this.setAttribute('uv', new THREE.BufferAttribute(uvs, 2))
+
+  this.computeBoundingSphere()
 }
 
 THREE.TeapotBufferGeometry.prototype = Object.create(

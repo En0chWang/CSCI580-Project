@@ -1,5 +1,4 @@
 let scene, camera, renderer, skyboxGeo, skybox, controls, myReq, sphere
-// let worldDirection = new THREE.Vector3()
 let zoomOut = false
 let autoRotate = true
 // Initial SkyboxImage is Arid. If you wanna change the path of inital SkybokImage or add button. to add button check the code above. I left the comment.
@@ -39,7 +38,6 @@ let teapotGeometry = new THREE.TeapotBufferGeometry(
   effectController.fitLid,
   !effectController.nonblinn
 )
-// teapotGeometry.attributes.color.needsUpate = true
 function init() {
   scene = new THREE.Scene()
 
@@ -67,12 +65,17 @@ function init() {
   let sphereMaterial = new THREE.MeshBasicMaterial({
     envMap: loader.load(urls),
   })
-  // var material = new THREE.MeshBasicMaterial({
-  //   vertexColors: THREE.VertexColors,
-  //   side: THREE.DoubleSide,
-  // })
+
+  let teapotGeometry = new THREE.TeapotBufferGeometry(
+    400,
+    30,
+    effectController.bottom,
+    effectController.lid,
+    effectController.body,
+    effectController.fitLid,
+    !effectController.nonblinn
+  )
   sphere = new THREE.Mesh(teapotGeometry, sphereMaterial)
-  // sphere = new THREE.Mesh(teapotGeometry, material)
   sphere.position.set(0, 100, 0)
   scene.add(sphere)
 
@@ -113,101 +116,8 @@ function animate() {
 
   controls.update()
   renderer.render(scene, camera)
-
-  // once camera position changes, console log current vector3
-  // camera.getWorldDirection(worldDirection)
-
-  // now we get surface vector3
-  // let pos_arr = teapotGeometry.getAttribute('position').array
-  // let pos_count = pos_arr.length
-  // var colors = []
-  // let norms = teapotGeometry.getAttribute('normal').array
-  // for (var i = 0; i < 30; i += 3) {
-  //   const pos_vector3 = new THREE.Vector3(
-  //     pos_arr[i],
-  //     pos_arr[i + 1],
-  //     pos_arr[i + 2]
-  //   ).normalize()
-  //   const norm_vector3 = new THREE.Vector3(norms[i], norms[i + 1], norms[i + 2])
-  //   let eyeToSurface = new THREE.Vector3()
-  //   eyeToSurface.subVectors(pos_vector3, worldDirection)
-  //   let reflect_vector3 = eyeToSurface.reflect(norm_vector3)
-  //   let raycaster = new THREE.Raycaster(norm_vector3, reflect_vector3)
-  //   let intersection_object = raycaster.intersectObject(skybox)[0]
-  //   let face_normal = intersection_object.face.normal
-  //   let face_material_index = intersection_object.face.materialIndex
-  //   let uv = intersection_object.uv
-  //   // console.log(reflect_vector3)
-  //   let img = createPathStrings(skyboxImage)[face_material_index]
-
-  //   let loader = new THREE.ImageLoader()
-  //   loader.load(
-  //     img,
-  //     function (image) {
-  //       const canvas = document.createElement('canvas')
-  //       const context = canvas.getContext('2d')
-  //       canvas.width = image.width
-  //       canvas.height = image.height
-
-  //       context.drawImage(image, 0, 0)
-  //       let texData = context.getImageData(0, 0, image.width, image.height)
-  //       let u = uv.x,
-  //         v = uv.v
-  //       var tx = Math.min((emod(u, 1) * texData.width) | 0, texData.width - 1)
-  //       var ty = Math.min((emod(v, 1) * texData.height) | 0, texData.height - 1)
-  //       var offset = (ty * texData.width + tx) * 4
-  //       var r = texData.data[offset + 0]
-  //       var g = texData.data[offset + 1]
-  //       var b = texData.data[offset + 2]
-  //       colors[i] = r
-  //       colors[i + 1] = g
-  //       colors[i + 2] = b
-  //     },
-  //     undefined,
-  //     function () {
-  //       console.error('an error happened')
-  //     }
-  //   )
-  // }
-
-  // colors = new Uint8Array(colors)
-  // teapotGeometry.setAttribute(
-  //   'color',
-  //   new THREE.BufferAttribute(colors, 3, true)
-  // )
-
-  // console.log(norms)
-
-  // calculate eyeToSurface vetor3
-
   myReq = window.requestAnimationFrame(animate)
 }
-
-// function emod(n, m) {
-//   return ((n % m) + m) % m
-// }
-
-// function getImageData(image) {
-//   var canvas = document.createElement('canvas')
-//   canvas.width = image.width
-//   canvas.height = image.height
-
-//   var context = canvas.getContext('2d')
-//   context.drawImage(image, 0, 0)
-
-//   return context.getImageData(0, 0, image.width, image.height)
-// }
-
-// function getPixel(imagedata, x, y) {
-//   var position = (x + imagedata.width * y) * 4,
-//     data = imagedata.data
-//   return {
-//     r: data[position],
-//     g: data[position + 1],
-//     b: data[position + 2],
-//     a: data[position + 3],
-//   }
-// }
 
 function createMaterialArray(filename) {
   const skyboxImagepaths = createPathStrings(filename)
@@ -221,7 +131,7 @@ function createMaterialArray(filename) {
 }
 
 function createPathStrings(filename) {
-  const basePath = 'Cubemap_Images/'
+  const basePath = './assets/Cubemap_Images/'
   const baseFilename = basePath + filename
   const fileType = '.jpg'
   const sides = ['ft', 'bk', 'up', 'dn', 'rt', 'lf']
