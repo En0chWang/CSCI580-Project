@@ -1,4 +1,4 @@
-# [Environment Mapping Using Three.js](https://en0chwang.github.io/CSCI580-Project/)
+# Environment Mapping Using Three.js
 
 ## Introduction
 
